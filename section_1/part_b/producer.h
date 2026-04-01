@@ -20,6 +20,7 @@ SC_MODULE(tpg_producer) {
         const int width = 780;
         const int height = 610;
 
+        // send first image
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 // Generate a simple RGB pattern (32-bit: 00RRGGBB)
@@ -41,11 +42,13 @@ SC_MODULE(tpg_producer) {
             }
         }
 
+        // send second image
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 // Generate a simple RGB pattern (32-bit: 00RRGGBB)
                 uint32_t pixel_data = (((x+y) % 256) << 16) | (((x+y) % 256) << 8) | ((x+y) % 256);
                 uint64_t addr = (y * width + x) * 4;
+                // set MSB of address, making it route to consumer 2
                 addr = setBit(addr, 63);
                 payload.set_command(tlm::TLM_WRITE_COMMAND);
                 payload.set_address(addr); // Byte address

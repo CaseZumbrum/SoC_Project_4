@@ -9,8 +9,11 @@
 
 
 SC_MODULE(memory_router) {
+    // input
     tlm_utils::simple_target_socket<memory_router> in_socket;
+    // output mapped with MSB of addr == 0
     tlm_utils::simple_initiator_socket<memory_router> out_socket_one;
+    // output mapped with MSB of addr == 1
     tlm_utils::simple_initiator_socket<memory_router> out_socket_two;
 
 
@@ -29,11 +32,14 @@ SC_MODULE(memory_router) {
         unsigned int   len  = trans.get_data_length();
 
         if (cmd == tlm::TLM_WRITE_COMMAND) {
-            // Convert byte address to index (assuming 4-byte pixels)
-            
+
+            // add delay
             delay += sc_time(10, SC_NS);
             wait(sc_time(10, SC_NS));
+
+            // clear MSB bit of transaction, only used for routing
             trans.set_address(clearBit(addr, 63));
+            // if MSB is set, goes to consumer 2
             if(checkBit(addr, 63)){
                 out_socket_two->b_transport(trans, delay);
             }else{
