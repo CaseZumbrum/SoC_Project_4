@@ -29,7 +29,7 @@ int main(int argc, char** argv )
     // waitKey(0);
 
     // write image
-    imwrite("out.png", image);
+    imwrite("hello_Zumbrum.jpg", image);
  
     
  

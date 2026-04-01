@@ -16,5 +16,5 @@ target_link_libraries(sc_main.o SystemC::systemc)
 
 set_target_properties(sc_main.o PROPERTIES
     ADDITIONAL_CLEAN_FILES
-    "out.png"
+    "lines_Zumbrum.jpg"
 )

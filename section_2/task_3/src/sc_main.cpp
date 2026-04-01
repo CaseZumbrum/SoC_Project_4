@@ -21,7 +21,7 @@ int sc_main(int argc, char* argv[]) {
     cout << "Simulation finished at " << sc_time_stamp() << endl;
 
     // 4. Verification: Save the image from the consumer's memory
-    consumer->save_image("out.png");
+    consumer->save_image("lines_Zumbrum.jpg");
 
     // Cleanup
     delete producer;

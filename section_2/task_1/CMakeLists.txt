@@ -7,5 +7,5 @@ target_link_libraries( main.o ${OpenCV_LIBS} )
 
 set_target_properties(main.o PROPERTIES
     ADDITIONAL_CLEAN_FILES
-    "out.png"
+    "hello_Zumbrum.jpg"
 )
