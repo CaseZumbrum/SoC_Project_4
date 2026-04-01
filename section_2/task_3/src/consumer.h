@@ -104,6 +104,7 @@ SC_MODULE(memory_consumer) {
     }
 
     int calculate_lines(cv::Mat& input, cv::Mat& output){
+        // based on https://docs.opencv.org/3.4/d9/db0/tutorial_hough_lines.html
         Mat edge_detected;
 
         // Load image
@@ -118,7 +119,7 @@ SC_MODULE(memory_consumer) {
 
         // Probabilistic Line Transform
         std::vector<cv::Vec4i> linesP;
-        HoughLinesP(edge_detected, linesP, 1, CV_PI/180, 50, 50, 10 ); // runs the actual detection
+        HoughLinesP(edge_detected, linesP, 1, CV_PI/180, 100, 50, 10 ); // runs the actual detection
         for( size_t i = 0; i < linesP.size(); i++ )
         {
             Vec4i l = linesP[i];
